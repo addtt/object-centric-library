@@ -1,6 +1,3 @@
-# A few parts of this GENESIS implementation are closely based on the official
-# PyTorch implementation at https://github.com/applied-ai-lab/genesis.
-
 from dataclasses import dataclass
 from typing import List
 

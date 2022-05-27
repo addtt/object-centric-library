@@ -1,5 +1,3 @@
-# This is an adaptation of the original implementation of SPACE: https://github.com/zhixuan-lin/SPACE
-
 import logging
 from dataclasses import dataclass
 from typing import Optional
