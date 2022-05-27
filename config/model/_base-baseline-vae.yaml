@@ -1,0 +1,41 @@
+# @package _global_
+
+defaults:
+  - _base
+
+batch_size: 64
+trainer:
+  _target_: models.baseline_vae.trainer.BaselineVAETrainer
+  steps: 500_000
+  use_exp_decay: true
+  exp_decay_rate: 0.5
+  exp_decay_steps: 100000
+  optimizer_config:
+    alg: Adam
+    lr: 0.0005
+
+model:
+  _target_: models.baseline_vae.model.BaselineVAE
+  num_slots: ${dataset.max_num_objects}
+  name: baseline_vae
+  sigma: 0.1
+  beta_kl: 1
+  latent_size_per_slot: 64
+  encoder_params:
+    layers_per_block_per_layer: [2,2,2,2,2,2,2,2]
+    channel_size_per_layer: [64,64,128,128,128,128,256,256]
+    num_layers_per_resolution: [2,2,2,2]   # same logic as in the decoder but with avg pool 2d
+    downsample: 4
+    mlp_hidden_size: 512
+  decoder_params:
+    layers_per_block_per_layer: [2,2,2,2,2,2,2,2]
+    broadcast_size: 8    # ignored with type == mlp
+    channel_size_per_layer: [256,256,128,128,128,128,64,64]
+    num_layers_per_resolution: [2,2,2,2]
+    mlp_hidden_size: 512
+      # it will try to place an interpolate after that number of
+      # layers, as close to the end of the stack as possible
+      # so as to be symmetrical compared to the encoder
+      # however, if the broadcast size is too big, it will
+      # not place all the expected interpolate, only enough
+      # to reach the original size of the image

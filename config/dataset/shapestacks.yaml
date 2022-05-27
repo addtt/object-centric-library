@@ -1,0 +1,22 @@
+# @package _global_
+
+dataset:
+  _target_: data.datasets.Shapestacks
+  width: 64
+  height: 64
+  input_channels: 3
+  num_background_objects: 1
+  max_num_objects: 7
+  dataset_path: shapestacks-full.hdf5
+  name: shapestacks
+  downstream_features:
+    - color
+    - shape
+    - size
+
+# Total available samples: 311_200
+data_sizes:
+  - 90000
+  - 5000
+  - 5000
+

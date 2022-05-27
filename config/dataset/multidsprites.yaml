@@ -1,0 +1,23 @@
+# @package _global_
+
+dataset:
+  _target_: data.datasets.Multidsprites
+  name: multidsprites
+  width: 64
+  height: 64
+  input_channels: 3
+  num_background_objects: 1
+  max_num_objects: 6
+  dataset_path: multidsprites_colored_on_grayscale-full.hdf5
+  downstream_features:
+    - x
+    - y
+    - scale
+    - shape
+    - color
+
+# Total available samples: 1_000_000
+data_sizes:
+  - 90000
+  - 5000
+  - 5000

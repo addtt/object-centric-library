@@ -1,0 +1,9 @@
+# @package _global_
+
+defaults:
+  - _base-baseline-vae
+
+model:
+  name: baseline_vae_broadcast
+  decoder_params:
+    architecture_type: broadcast

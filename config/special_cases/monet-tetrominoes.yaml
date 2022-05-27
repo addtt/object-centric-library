@@ -1,0 +1,6 @@
+# @package _global_
+
+model:
+  num_blocks_unet: 4
+  bg_sigma: 0.3
+  fg_sigma: 0.36

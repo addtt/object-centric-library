@@ -1,0 +1,5 @@
+# @package _global_
+
+model:
+  height: ${dataset.height}
+  width: ${dataset.width}

@@ -1,0 +1,23 @@
+# @package _global_
+
+dataset:
+  _target_: data.datasets.Clevr
+  width: 128
+  height: 128
+  num_background_objects: 1
+  max_num_objects: 11
+  name: clevr
+  input_channels: 3
+  dataset_path: clevr_10-full.hdf5
+  downstream_features:
+    - x
+    - y
+    - size
+    - shape
+    - material
+    - color
+
+data_sizes:
+  - 90000
+  - 5000
+  - 5000

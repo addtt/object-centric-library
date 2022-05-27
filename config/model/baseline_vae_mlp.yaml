@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - _base-baseline-vae
+
+model:
+  name: baseline_vae_mlp
+  decoder_params:
+    architecture_type: mlp

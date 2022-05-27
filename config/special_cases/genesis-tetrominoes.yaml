@@ -1,0 +1,9 @@
+# @package _global_
+
+model:
+  mask_vae_params:
+    encoded_image_size: 8  # images are 32x32 so this is half
+    encoder_params:
+      kernels: [5, 5, 5, 5, 5, 8]  # last kernel shape is equal to encoded_image_size
+    decoder_params:
+      kernels: [8, 5, 5, 5, 5, 5, 1]  # first kernel shape is equal to encoded_image_size

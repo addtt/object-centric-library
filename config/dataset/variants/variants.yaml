@@ -1,0 +1,198 @@
+clevr:
+  '6':
+    updates:
+      # Total available samples: 53483
+      data_sizes:
+      - 49483
+      - 2000
+      - 2000
+      dataset:
+        dataset_filter_string: ('num_actual_objects'<=6)
+    variant_type: dataset
+  greater_than_6:
+    updates:
+      # Total available samples: 46517
+      data_sizes:
+      - 42517
+      - 2000
+      - 2000
+      dataset:
+        dataset_filter_string: ('num_actual_objects'>6)
+    parent: '6'
+    variant_type: num_objects
+  object_color:
+    parent: '6'
+  object_style:
+    parent: '6'
+  occlusion:
+    parent: '6'
+  crop:
+    parent: '6'
+  style_transfer:
+    parent: '6'
+  fg_style_transfer:
+    parent: '6'
+  no_green_spheres:
+    updates:
+      # Total available samples: 44003
+      data_sizes:
+      - 40003
+      - 2000
+      - 2000
+      dataset:
+        heldout_dataset: false
+        heldout_filter_string: (('color'==3)&('shape'==1);ANY)
+    parent: '6'
+    variant_type: heldout_train_dataset
+  green_spheres:
+    updates:
+      # Total available samples: 9480
+      data_sizes:
+      - 0
+      - 5000
+      - 4480
+      dataset:
+        heldout_dataset: true
+    parent: no_green_spheres
+    variant_type: heldout_test_dataset
+multidsprites:
+  occlusion:
+  object_shape:
+    updates:
+      dataset:
+        dataset_filter_string: ('visibility'>=0.95;<=4)
+  crop:
+  object_style:
+  style_transfer:
+  fg_style_transfer:
+  no_green_squares:
+    updates:
+      # Total available samples: 817352
+      data_sizes:
+      - 90000
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: false
+        heldout_filter_string: (((((('shape'==1)&('visibility'==1))&('hue'>=0.25))&('hue'<=0.42))&('saturation'>=0.5))&('value'>=0.5);ANY)
+    variant_type: heldout_train_dataset
+  green_squares:
+    updates:
+      # Total available samples: 182648
+      data_sizes:
+      - 90000
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: true
+    parent: no_green_squares
+    variant_type: heldout_test_dataset
+shapestacks:
+  occlusion:
+  crop:
+  object_style:
+  object_color:
+  style_transfer:
+  fg_style_transfer:
+  no_cylinders:
+    updates:
+      # Total available samples: 160368
+      data_sizes:
+      - 90000
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: false
+        heldout_filter_string: ('shape'==2;ANY)
+    variant_type: heldout_train_dataset
+  cylinders:
+    updates:
+      # Total available samples: 150832
+      data_sizes:
+      - 90000
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: true
+    parent: no_cylinders
+    variant_type: heldout_test_dataset
+  no_green_cylinders:
+    updates:
+      # Total available samples: 262752
+      data_sizes:
+      - 90000
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: false
+        heldout_filter_string: (('color'==2)&('shape'==2);ANY)
+    variant_type: heldout_train_dataset
+  green_cylinders:
+    updates:
+      # Total available samples: 48448
+      data_sizes:
+      - 38448
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: true
+    parent: no_green_cylinders
+    variant_type: heldout_test_dataset
+tetrominoes:
+  occlusion:
+  crop:
+  object_style:
+  object_color:
+  style_transfer:
+  fg_style_transfer:
+  no_zs:
+    updates:
+      # Total available samples: 503318
+      data_sizes:
+      - 90000
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: false
+        heldout_filter_string: (('shape'>=10.5)&('shape'<=14.5);ANY)
+    variant_type: heldout_train_dataset
+  zs:
+    updates:
+      # Total available samples: 496682
+      data_sizes:
+      - 90000
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: true
+    parent: no_zs
+    variant_type: heldout_test_dataset
+  no_green_zs:
+    updates:
+      # Total available samples: 900936
+      data_sizes:
+      - 90000
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: false
+        heldout_filter_string: ((('shape'>=10.5)&('shape'<=14.5))&('color'==2);ANY)
+    variant_type: heldout_train_dataset
+  green_zs:
+    updates:
+      # Total available samples: 99064
+      data_sizes:
+      - 89064
+      - 5000
+      - 5000
+      dataset:
+        heldout_dataset: true
+    parent: no_green_zs
+    variant_type: heldout_test_dataset
+objects_room:
+  occlusion:
+  crop:
+  object_style:
+  object_color:
+  style_transfer:
+  fg_style_transfer:

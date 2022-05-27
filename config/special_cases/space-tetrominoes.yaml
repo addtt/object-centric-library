@@ -1,0 +1,15 @@
+# @package _global_
+
+trainer:
+  z_pres_start_value: 0.1
+  z_pres_end_value: 0.01
+
+  bl_off_step: 100_000
+
+  optimizer_config:
+    fg:
+      lr: 1e-4
+
+model:
+  fg_params:
+    G: 4

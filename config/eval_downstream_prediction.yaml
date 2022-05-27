@@ -1,0 +1,56 @@
+checkpoint_path: ???
+device: cuda
+seed: 12345
+batch_size: 64
+steps: 6000   # maximum number of steps
+downstream_model: MLP1   # "linear" or "MLPx" or "wideMLPx" where x is a positive integer
+learning_rate: 1e-3
+lr_decay_milestones: [2000, 4000]
+lr_decay_factor: 0.5
+
+train_size: 10000
+validation_size: 1024
+test_size: 2000
+
+validation_every: 250
+
+# Matching can be: 'loss', 'mask' (only for object-centric), 'deterministic' (only for VAEs).
+matching: loss
+
+train_ignore_mode: default
+test_ignore_mode: default
+
+# Default dataset variant types to consider for downstream prediction task.
+# If some of these are missing for the datasets that the object-centric model was
+# trained on, they are simply skipped. These are for standard experiments - this field
+# can be overridden to consider different variants, e.g. in the heldout experiments.
+variant_types:
+- original
+- occlusion
+- crop
+- object_style
+- object_color
+- num_objects
+- object_shape
+
+output_features: all   # 'all' or list of strings
+
+use_cache: true  # Cache representations in the first epoch when training downstream models
+
+# The `overwrite` flag acts at the training set level. So we can run the downstream
+# evaluation on new training sets, or using different downstream models or slot matching
+# strategies and the results will be stored in new folders.
+overwrite: false
+
+debug: false
+
+# Num workers for training only. Downstream training might be faster when this is 0.
+num_workers: 0
+
+hydra:
+  run:
+    dir: ./
+  output_subdir: null
+
+defaults:
+  - override hydra/job_logging: disabled

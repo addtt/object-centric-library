@@ -1,0 +1,19 @@
+# @package _global_
+
+dataset:
+  _target_: data.datasets.MultiObjectDataset
+  width: 64
+  height: 64
+  num_background_objects: 4
+  max_num_objects: 7
+  name: objects_room
+  input_channels: 3
+  dataset_path: objects_room_train-full.hdf5
+  downstream_features: []
+
+# Total available samples: 1_000_000
+data_sizes:
+  - 90000
+  - 5000
+  - 5000
+

@@ -1,0 +1,51 @@
+# @package _global_
+
+defaults:
+  - _base
+
+batch_size: 64
+trainer:
+  _target_: models.monet.trainer.MONetTrainer
+  init_trunc_normal: false
+  init_mean: 0.0
+  init_std: 0.02
+  steps: 500_000
+  use_exp_decay: true
+  exp_decay_rate: 0.5
+  exp_decay_steps: 500_000
+  optimizer_config:
+    alg: Adam
+    lr: 1e-4
+
+
+model:
+  _target_: models.monet.model.Monet
+  name: monet
+  num_slots: ${dataset.max_num_objects}
+  bg_sigma: 0.06
+  fg_sigma: 0.1
+  num_blocks_unet: 5
+  beta_kl: 0.5
+  gamma: 0.5
+  latent_size: 16
+  encoder_params:
+    channels: [32, 32, 64, 64]
+    kernels: [3, 3, 3, 3]
+    strides: [2, 2, 2, 2]
+    paddings: [0, 0, 0, 0]
+    input_channels: 4
+    batchnorms: [false, false, false, false]
+    bn_affines: [false, false, false, false]
+    activations: relu
+    mlp_hidden_size: 256
+    mlp_output_size: 32  # latent_size * 2
+  decoder_params:
+    w_broadcast: ${dataset.width} + 8
+    h_broadcast: ${dataset.height} + 8
+    input_channels: 18  # latent_size + 2
+    channels: [32, 32, 64, 64, 4]  # last is 4 channels because rgb (3) + mask (1)
+    kernels: [3, 3, 3, 3, 1]
+    paddings: [0, 0, 0, 0, 0]
+    activations: [relu, relu, relu, relu, null]
+    batchnorms: [false, false, false, false, false]
+    bn_affines: [false, false, false, false, false]

@@ -1,0 +1,11 @@
+# @package _global_
+
+batch_size: 32
+model:
+  num_slots: 7
+  mask_vae_params:
+    encoder_params:
+      strides: [1, 2, 2, 2, 1, 1]  # one more stride=2 because image is 128x128
+    decoder_params:
+      strides: [1, 1, 2, 2, 2, 1, 1]
+      output_paddings: [0, 0, 1, 1, 1, 0, 0]

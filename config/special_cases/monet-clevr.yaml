@@ -1,0 +1,10 @@
+# @package _global_
+
+batch_size: 32
+model:
+  num_blocks_unet: 6
+  num_slots: 7
+trainer:
+  optimizer_config:
+    alg: RMSprop
+    lr: 3e-5

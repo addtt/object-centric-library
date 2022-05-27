@@ -1,0 +1,73 @@
+# @package _global_
+
+defaults:
+  - _base
+
+batch_size: 64
+trainer:
+  _target_: models.genesis.trainer.GenesisTrainer
+  steps: 500_000
+  optimizer_config:
+    alg: Adam
+    lr: 1e-4
+
+model:
+  _target_: models.genesis.model.Genesis
+  name: genesis
+  num_slots: ${dataset.max_num_objects}
+  sigma_recon: 0.7
+  geco_goal_constant: 0.5655
+  geco_step_size: 1e-5
+  geco_alpha: 0.99
+  geco_init: 1.0
+  geco_min: 1e-5
+  geco_speedup: 10.0
+  mask_vae_params:
+    hidden_state_lstm: 256
+    encoded_image_size: 16
+    latent_size: 64
+    encoder_params:
+      input_channels: 3
+      channels: [64, 64, 128, 128, 128, 512]  # channels are doubled because of GLU
+      paddings: [2, 2, 2, 2, 2, 0]
+      strides: [1, 2, 1, 2, 1, 1]
+      kernels: [5, 5, 5, 5, 5, 16]  # last kernel is encoded_image_size
+      batchnorms: [true, true, true, true, true, false]
+      bn_affines: true
+      activations: glu
+    decoder_params:
+      input_channels: ${model.mask_vae_params.latent_size}
+      conv_transposes: [true, true, true, true, true, true, false]
+      channels: [128, 128, 128, 128, 64, 64, 2]  # channels are doubled because of GLU (except for last)
+      strides: [1, 1, 2, 1, 2, 1, 1]
+      kernels: [16, 5, 5, 5, 5, 5, 1]  # first kernel is encoded_image_size
+      paddings: [0, 2, 2, 2, 2, 2, 0]
+      output_paddings: [0, 0, 1, 0, 1, 0, 0]
+      batchnorms: [false, true, true, true, true, true, false]
+      bn_affines: true
+      activations: [glu, glu, glu, glu, glu, glu, null]
+  component_vae_params:
+    latent_size: 16
+    encoder_params:
+      width: ${dataset.width}
+      height: ${dataset.height}
+      channels: [32, 32, 64, 64]
+      kernels: [3, 3, 3, 3]
+      strides: [2, 2, 2, 2]
+      paddings: [1, 1, 1, 1]
+      input_channels: 4  # input image + mask
+      batchnorms: false
+      bn_affines: false
+      activations: elu
+      mlp_hidden_size: 256
+      mlp_output_size: 32  # latent_size * 2
+    decoder_params:
+      h_broadcast: ${dataset.height} + 8
+      w_broadcast: ${dataset.width} + 8
+      input_channels: 18  # latent size + 2
+      channels: [32, 32, 64, 64, 3]
+      kernels: [3, 3, 3, 3, 1]
+      activations: [elu, elu, elu, elu, null]
+      batchnorms: false
+      bn_affines:  false
+      paddings: [0, 0, 0, 0, 0]

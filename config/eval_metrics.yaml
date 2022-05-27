@@ -1,0 +1,37 @@
+checkpoint_path: ???
+device: cuda
+seed: 12345
+batch_size: 64
+dataset_size: null  # Defaults to test set of training checkpoint.
+
+loss_terms: [loss]
+
+# If null (default), use data sizes of training checkpoint.
+starting_index: null
+
+# Default dataset variant types to consider for metric evaluation.
+# If some of these are missing for the datasets that the object-centric model was
+# trained on, they are simply skipped. These are for standard experiments - this field
+# can be overridden to consider different variants, e.g. in the heldout experiments.
+variant_types:
+- original
+- occlusion
+- crop
+- object_style
+- object_color
+- num_objects
+- object_shape
+
+output_features: all   # 'all' or list of strings
+
+overwrite: false
+
+debug: false
+
+hydra:
+  run:
+    dir: ./
+  output_subdir: null
+
+defaults:
+  - override hydra/job_logging: disabled

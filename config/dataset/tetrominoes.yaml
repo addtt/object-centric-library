@@ -1,0 +1,23 @@
+# @package _global_
+
+dataset:
+  _target_: data.datasets.Tetrominoes
+  width: 32
+  height: 32
+  name: tetrominoes
+  num_background_objects: 1
+  max_num_objects: 4
+  input_channels: 3
+  dataset_path: tetrominoes-full.hdf5
+  downstream_features:
+    - x
+    - y
+    - shape
+    - color
+
+# Total available samples: 1_000_000
+data_sizes:
+  - 90000
+  - 5000
+  - 5000
+
