@@ -56,7 +56,7 @@ The library can be [extended](#extending-the-library) with more models, datasets
 Example installation with [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html):
 
     ```shell
-    conda env create --name object_centric_lib python=3.8
+    conda create --name object_centric_lib python=3.8
     conda activate object_centric_lib
     
     # Optionally install PyTorch with a custom CUDA version. Example:
