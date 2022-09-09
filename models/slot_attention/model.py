@@ -240,6 +240,19 @@ class SlotAttentionAE(BaseModel):
         slot = slot.unsqueeze(-1).unsqueeze(-1)
         return slot.repeat(1, 1, self.w_broadcast, self.h_broadcast)
 
+
+    def c_comp_decoding(self,z):
+        bs = z.size(0)
+        z = z.view(bs,self.num_slots,16)
+        slots = z.flatten(0, 1)
+        slots = self.spatial_broadcast(slots)
+        img_slots, masks = self.decoder(slots)
+        img_slots = img_slots.view(bs, self.num_slots, 3, self.width, self.height)
+        masks = masks.view(bs, self.num_slots, 1, self.width, self.height)
+        masks = masks.softmax(dim=1)
+        x = (img_slots * masks).sum(dim=1)
+        return x
+
     def forward(self, x: Tensor) -> dict:
         with torch.no_grad():
             x = x * 2.0 - 1.0

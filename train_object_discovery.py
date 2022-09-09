@@ -119,7 +119,6 @@ def main(config):
         num_workers=config.num_workers,
         pin_memory="cuda" in config.device and config.num_workers > 0,
     )
-
     logging.info("Creating trainer")
     trainer: BaseTrainer = hydra.utils.instantiate(
         config.trainer,

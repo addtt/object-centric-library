@@ -44,6 +44,16 @@ class Monet(BaseModel):
     def slot_size(self) -> int:
         return self.latent_size
 
+
+    def c_comp_decoding(self, z):
+        bs = z.size(0)
+        z = z.view(bs,6,16)
+        slots, masks_pred = self._decode(z)
+        b,s,w,h = masks_pred.shape
+        masks_pred = masks_pred.view(b,s,1,w,h)
+        x = (slots * masks_pred).sum(dim=1).flatten(1)
+        return x
+
     def forward(self, x: Tensor) -> dict:
         # input: (B, 3, H, W)
         # Forward pass through recurrent attention network.

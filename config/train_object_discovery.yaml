@@ -6,7 +6,7 @@ defaults:
   - override hydra/job_logging: disabled
 
 seed: 12345
-device: cuda
+device: cpu
 debug: false
 num_workers: 0
 

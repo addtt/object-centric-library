@@ -21,7 +21,7 @@ model:
   _target_: models.slot_attention.model.SlotAttentionAE
   name: slot-attention
   num_slots: ${dataset.max_num_objects}
-  latent_size: 64
+  latent_size: 16
   encoder_params:
     channels: [32, 32, 32, 32]
     kernels: [5, 5, 5, 5]

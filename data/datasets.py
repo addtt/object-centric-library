@@ -4,7 +4,7 @@ import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Literal, Optional, Tuple, Union
-
+import os
 import h5py
 import hydra
 import matplotlib
@@ -510,6 +510,7 @@ def make_dataset(
         f"Instantiating dataset with starting_index={starting_index} and size={dataset_size}."
     )
     logging.debug(f"Dataset config:\n{dataset_config}")
+
     if kwargs is None:
         kwargs = {}
     return hydra.utils.instantiate(
@@ -518,7 +519,6 @@ def make_dataset(
         dataset_size=dataset_size,
         **kwargs,
     )
-
 
 def make_dataloaders(
     dataset_config: DictConfig,
@@ -574,6 +574,7 @@ def make_dataloader(
     pin_memory: bool = True,
     num_workers: int = 0,
 ) -> DataLoader:
+    
     dataset = make_dataset(dataset_config, starting_index, dataset_size)
     return DataLoader(
         dataset,
@@ -604,7 +605,10 @@ def _load_data_hdf5(
     """Loads data and metadata assuming the data is hdf5, and converts it to dict."""
     metadata_fname = f"{data_path.stem.split('-')[0]}-{metadata_suffix}"
     metadata_path = data_path.parent / metadata_fname
+    os.chdir("/Users/jackbrady/object-centric-library")
+    dataset = h5py.File(data_path, "r")
     metadata = np.load(str(metadata_path), allow_pickle=True).item()
+    print("Hoooooo")
     if not isinstance(metadata, dict):
         raise RuntimeError(f"Metadata type {type(metadata)}, expected instance of dict")
     dataset = h5py.File(data_path, "r")

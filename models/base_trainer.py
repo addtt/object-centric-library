@@ -96,6 +96,7 @@ class BaseTrainer:
             optimizer.zero_grad()
         batch, output = self.eval_step(batch)
         self._check_shapes(batch, output)  # check shapes of mandatory items
+        print(output["loss"])
         output["loss"].backward()
         if self.clip_grad_norm is not None:
             torch.nn.utils.clip_grad_norm_(
