@@ -131,8 +131,8 @@ class SlotAttentionModule(nn.Module):
         self.eps = eps
         self.scale = dim**-0.5
 
-        self.slots_mu = nn.Parameter(torch.rand(1, 1, dim))
-        self.slots_log_sigma = nn.Parameter(torch.randn(1, 1, dim))
+        self.slots_mu = nn.Parameter(torch.empty(1, 1, dim))
+        self.slots_log_sigma = nn.Parameter(torch.empty(1, 1, dim))
         with torch.no_grad():
             limit = sqrt(6.0 / (1 + dim))
             torch.nn.init.uniform_(self.slots_mu, -limit, limit)
@@ -163,7 +163,7 @@ class SlotAttentionModule(nn.Module):
 
         mu = self.slots_mu.expand(b, num_slots, -1)
         sigma = self.slots_log_sigma.expand(b, num_slots, -1).exp()
-        slots = torch.normal(mu, sigma)
+        slots = mu + sigma * torch.randn_like(sigma)
 
         inputs = self.norm_input(inputs)
         k, v = self.to_k(inputs), self.to_v(inputs)
