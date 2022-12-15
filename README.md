@@ -1,4 +1,4 @@
-# Object-centric library
+# Object-Centric Library
 
 Code accompanying our paper:
 
@@ -18,13 +18,13 @@ Summary of out-of-the-box functionalities (see [Using the library](#using-the-li
   as well as in a qualitative way) under a range of distribution shifts.
 
 The image below showcases the datasets (top row) and the distribution shifts
-available in CLEVR (bottom row). 
+available in CLEVR (bottom row), as used in our paper. 
 
 <p align="center">
 <img style="width:598px" alt="Datasets and distribution shifts" src="assets/datasets_and_shifts.png"/>
 </p>
 
-Visualizations of a few object-centric models on the five datasets in the library:
+Visualizations of a few object-centric models trained in our study on the datasets shown above:
 
 <p align="center">
 <img alt="Visualization trained models" src="assets/model_viz_small.gif"/>
@@ -46,7 +46,7 @@ Visualizations of a few object-centric models on the distribution shifts on CLEV
 
 
 The library can be [extended](#extending-the-library) with more models, datasets, distribution shifts, evaluation metrics, and downstream tasks.
-
+Compared to the original library used in our paper, the current version includes the ClevrTex dataset.
 
 
 
@@ -71,9 +71,22 @@ Example installation with [conda](https://docs.conda.io/projects/conda/en/latest
 
     Python 3.8 recommended (&ge;3.8 required). 
 
-3. Set the environment variable `OBJECT_CENTRIC_LIB_DATA` to the folder where the datasets should be stored. 
+2. Set the environment variable `OBJECT_CENTRIC_LIB_DATA` to the folder where the datasets should be stored.
 
-4. Download the datasets with [`download_data.py`](download_data.py).
+   <details>
+   <summary>Details:</summary>
+   
+   For example, on Linux or MacOS, add the following line to `~/.bashrc` (or `~/.zshrc`,
+   depending on your shell):
+
+   ```shell
+    export OBJECT_CENTRIC_LIB_DATA=/path/to/datasets
+    ```
+   
+   Then, restart the shell or run `. ~/.bashrc` (or `. ~/.zshrc`).
+   </details>
+
+3. Download the datasets with [`download_data.py`](download_data.py).
 
     <details>
    
@@ -156,6 +169,9 @@ and the following datasets:
 - [Objects Room](https://github.com/deepmind/multi_object_datasets) - `objects_room`
 - [Shapestacks](https://ogroth.github.io/shapestacks/) - `shapestacks`
 - [Tetrominoes](https://github.com/deepmind/multi_object_datasets) - `tetrominoes`
+- [ClevrTex](https://arxiv.org/abs/2111.10265) - `clevrtex`
+  - This is not included in the original paper. Since textures are already present, we do 
+    not provide a style-transfer version. Also note that standard dataset variants are not yet supported.
 
 
 
@@ -352,7 +368,7 @@ com
 
 ## Citation
 
-If you use this code in your own work, please cite
+If you use this library in your own work, please consider citing
 [our paper](https://arxiv.org/abs/2107.00637) as follows:
 
 ```
@@ -363,3 +379,12 @@ If you use this code in your own work, please cite
   year={2022},
 }
 ```
+
+## Notes
+
+In a follow-up paper, we use this library to investigate inductive biases in unsupervised 
+object-centric learning when the objects in the training set have complex textures:
+
+> [Inductive Biases for Object-Centric Representations in the Presence of Complex Textures](https://arxiv.org/abs/2204.08479) </br>
+> Samuele Papa, Ole Winther, Andrea Dittadi </br>
+> UAI workshop on Causal Representation Learning, 2022
