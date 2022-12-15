@@ -113,20 +113,26 @@ Example installation with [conda](https://docs.conda.io/projects/conda/en/latest
     
     This saves the model and the logs by default in `outputs/runs/${MODEL}-${DATASET}-${DATETIME}`.
 
-2. Evaluate reconstruction and segmentation metrics, given the path to the
-root folder of the experimental run:
+2. Resume training of a run, given the path to the root folder `${RUN_ROOT}` of the run:
+
+    ```shell
+    python train_object_discovery.py model=monet dataset=multidsprites hydra.run.dir=${RUN_ROOT} allow_resume=true
+    ```
+
+3. Evaluate reconstruction and segmentation metrics, given `${RUN_ROOT}` (the path to the
+root folder of the run):
 
     ```shell
     python eval_metrics.py checkpoint_path=outputs/runs/monet-multidsprites-YYYY-MM-DD_HH-MM-SS
     ```
 
-3. Run the downstream object property prediction task (training + evaluation):
+4. Run the downstream object property prediction task (training + evaluation):
 
     ```shell
     python eval_downstream_prediction.py downstream_model=linear checkpoint_path=outputs/runs/monet-multidsprites-YYYY-MM-DD_HH-MM-SS
     ```
 
-4. Save visualizations (reconstructions, masks, slot reconstructions):
+5. Save visualizations (reconstructions, masks, slot reconstructions):
 
     ```shell
     python eval_qualitative.py checkpoint_path=outputs/runs/monet-multidsprites-YYYY-MM-DD_HH-MM-SS
