@@ -7,7 +7,7 @@ Code accompanying our paper:
 > ICML 2022
 
 Summary of out-of-the-box functionalities (see [Using the library](#using-the-library)):
-- **training** object-centric models (plus a VAE baseline) on multi-object datasets;
+- **training** 4 object-centric models (plus 2 VAE baselines) on 6 multi-object datasets;
 - **evaluating** trained models in terms of: 
   - object segmentation;
   - a downstream task consisting in predicting all object properties;
@@ -18,7 +18,7 @@ Summary of out-of-the-box functionalities (see [Using the library](#using-the-li
   as well as in a qualitative way) under a range of distribution shifts.
 
 The image below showcases the datasets (top row) and the distribution shifts
-available in CLEVR (bottom row), as used in our paper. 
+on CLEVR (bottom row) that were used in the experimental study in our paper.
 
 <p align="center">
 <img style="width:598px" alt="Datasets and distribution shifts" src="assets/datasets_and_shifts.png"/>
