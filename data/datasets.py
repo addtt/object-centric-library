@@ -472,6 +472,10 @@ class Clevr(MultiObjectDataset):
         return data, metadata
 
 
+class ClevrTex(Clevr):
+    pass
+
+
 class Multidsprites(MultiObjectDataset):
     def _load_data(self) -> Tuple[DataDict, MetadataDict]:
         data, metadata = super()._load_data()

@@ -20,8 +20,9 @@ def _dataset_files(name: str, *, include_style: bool) -> List[str]:
         "multidsprites": "multidsprites_colored_on_grayscale",
         "objects_room": "objects_room_train",
     }.get(name, name)
+    datasets_without_style = ["clevrtex"]
     out = [f"{extended_name}-{suffix}" for suffix in ["full.hdf5", "metadata.npy"]]
-    if include_style:
+    if include_style and name not in datasets_without_style:
         out.append(f"{name}-style.hdf5")
     return out
 

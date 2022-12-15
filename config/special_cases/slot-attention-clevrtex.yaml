@@ -1,0 +1,19 @@
+# @package _global_
+
+model:
+  num_slots: 7
+  encoder_params:
+    channels: [64, 64, 64, 64]
+    strides: [1, 2, 2, 1]   # This follows the set prediction experiments in the paper
+  decoder_params:
+    conv_transposes: true
+    channels: [64, 64, 64, 64, 64, 4]
+    activations: [relu, relu, relu, relu, relu, null]
+    kernels: [5, 5, 5, 5, 5, 3]
+    strides: [2, 2, 2, 2, 1, 1]
+    paddings: [2, 2, 2, 2, 2, 1]
+    output_paddings: [1, 1, 1, 1, 0, 0]
+  w_broadcast: 8
+  h_broadcast: 8
+
+batch_size: 32

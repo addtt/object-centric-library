@@ -22,6 +22,8 @@ DATASET_SHA256 = {
     "tetrominoes-full.hdf5": "de19edfe00e6322058edbad25c9b3a8c55f7112cf9dac1565ccd87a2cdb87ffd",
     "tetrominoes-metadata.npy": "39ec2179213e1281e24d2f0869751846e8dd065bbcf5e1f1b435d967b73824fd",
     "tetrominoes-style.hdf5": "fcaeeb7656b6fc83d7108af33063772b605d5a22c58e2fb27eb7c28dec4ec22e",
+    "clevrtex-full.hdf5": "7e1a667a2587bc64509eeab96082c15c22d53105be2aa74495277db33f3f839f",
+    "clevrtex-metadata.npy": "ec28e2ef7a19469ee3b0c187af42ca472c15074f1cea12db6f1378fa3fcbf948",
 }
 
 ignored = [".DS_Store", "LICENSE", "README.txt"]
@@ -54,6 +56,7 @@ if __name__ == "__main__":
         else:
             unmatched.append(name)
             msg = "NOT MATCHED"
+            print(digest)
         print(f"  {name:60s}  {msg}")
     if len(unmatched) == 0:
         print("All files were matched")

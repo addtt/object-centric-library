@@ -1,0 +1,22 @@
+# @package _global_
+
+dataset:
+  _target_: data.datasets.ClevrTex
+  width: 128
+  height: 128
+  num_background_objects: 1
+  max_num_objects: 11
+  name: clevrtex
+  input_channels: 3
+  dataset_path: clevrtex-full.hdf5
+  downstream_features:
+    - x
+    - y
+    - size
+    - shape
+    - material
+
+data_sizes:
+  - 40000
+  - 5000
+  - 5000

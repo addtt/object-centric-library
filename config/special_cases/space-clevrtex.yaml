@@ -1,0 +1,17 @@
+# @package _global_
+
+trainer:
+  z_pres_start_value: 0.1
+  z_pres_end_value: 0.01
+
+  tau_end_step: 20_000
+
+  optimizer_config:
+    fg:
+      lr: 1e-4
+
+model:
+  fg_params:
+    fg_sigma: 0.05
+  bg_params:
+    bg_sigma: 0.05
