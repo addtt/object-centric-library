@@ -7,15 +7,13 @@ Code accompanying our paper:
 > ICML 2022
 
 Summary of out-of-the-box functionalities (see [Using the library](#using-the-library)):
-- **training** 4 object-centric models (plus 2 VAE baselines) on 6 multi-object datasets;
+- **training** 4 object-centric models and 2 VAE baselines on 6 multi-object datasets (CLEVR, MultidSprites, Objects Room, Shapestacks, Tetrominoes, ClevrTex);
 - **evaluating** trained models in terms of: 
   - object segmentation;
   - a downstream task consisting in predicting all object properties;
   - qualitative performance, e.g., showing reconstructions, segmentation masks, and 
       separate reconstructions from each slot.
-- evaluating the **generalization** of trained models 
-  (again in terms of object segmentation and downstream task performance, 
-  as well as in a qualitative way) under a range of distribution shifts.
+- evaluating the **generalization** of trained models under a range of distribution shifts.
 
 The image below showcases the datasets (top row) and the distribution shifts
 on CLEVR (bottom row) that were used in the experimental study in our paper.
@@ -46,7 +44,8 @@ Visualizations of a few object-centric models on the distribution shifts on CLEV
 
 
 The library can be [extended](#extending-the-library) with more models, datasets, distribution shifts, evaluation metrics, and downstream tasks.
-Compared to the original library used in our paper, the current version includes the ClevrTex dataset.
+
+Compared to the original library used in our paper, the current version includes the [ClevrTex](https://arxiv.org/abs/2111.10265) dataset.
 
 
 
