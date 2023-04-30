@@ -360,7 +360,7 @@ com
 ## Contributors
 
 - [Andrea Dittadi](https://github.com/addtt)
-- [Samuele Papa](https://github.com/apra)
+- [Samuele Papa](https://github.com/samuelepapa)
 - [Michele De Vita](https://github.com/Michedev)
 
 
